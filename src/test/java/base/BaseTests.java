@@ -15,15 +15,14 @@ public class BaseTests {
     protected HomePage homepage;
 
     @BeforeClass
-    public void setUp() throws InterruptedException {
+    public void setUp() {
+
         // Settings to bypass chromedriver issues with 111.* driver
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        ChromeOptions opt = new ChromeOptions();
-        opt.addArguments("--remote-allow-origins=*");
 
         // initiating and launching chrome driver
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(getChromeOptions());
 
         // maximizing browser window
         driver.manage().window().maximize();
@@ -34,6 +33,24 @@ public class BaseTests {
 
         // initiating HomePage object to start with
         homepage = new HomePage(driver);
+    }
+
+    private ChromeOptions getChromeOptions(){
+
+        ChromeOptions opt = new ChromeOptions();
+        opt.addArguments("--remote-allow-origins=*");
+
+        // Making the test headless
+        opt.setHeadless(true);
+
+        // Disabling automation info bar
+        //opt.addArguments("disable-infobars");
+
+        //DesiredCapabilities dc = new DesiredCapabilities();
+        //dc.setCapability(ChromeOptions.CAPABILITY, opt);
+
+        return opt;
+
     }
 
     @AfterClass

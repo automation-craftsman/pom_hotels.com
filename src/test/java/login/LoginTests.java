@@ -17,6 +17,8 @@ public class LoginTests extends BaseTests {
         var loginPage = homepage.GoToLoginPage();
         loginPage.FillLoginData(email, password);
         var home = loginPage.ClickSignInButton();
+
+        // Checking the login status by comparing the user avatar name and the first name of the logged user
         assertTrue(home.GetUsersAvatarName().contains(user_name));
         home.LogOut();
     }
@@ -25,6 +27,8 @@ public class LoginTests extends BaseTests {
     public void TestFailedLogIn(){
         var loginPage = homepage.GoToLoginPage();
         loginPage.FillLoginData(invalid_email, password);
+
+        // Rest of the method is still incomplete
 
     }
 

@@ -19,8 +19,12 @@ public class SignUpTests extends BaseTests {
         signuppage.fillOutFormData(email, first_name, last_name, password);
         var signupwelcomepage = signuppage.ContinueToSignUp();
         var confirmation_text = signupwelcomepage.getWelcomeText();
+
+        // Checking successful sign up by comparing welcome message
         assertTrue(confirmation_text.contains("Welcome"));
         var homePage = signupwelcomepage.clickContinue();
+
+        // Checking the login status by comparing the user avatar name and the first name of the logged user
         assertTrue(homePage.GetUsersAvatarName().contains(first_name));
 
         homePage.LogOut();
